@@ -4,8 +4,17 @@ const diceBtn = document.querySelector('.btn--roll');
 const dice = document.querySelector('.dice');
 const holdBtn = document.querySelector('.btn--hold');
 const newGameBtn = document.querySelector('.btn--new');
-const score1 = document.querySelector('#score--0');
-const score2 = document.querySelector('#score--1');
+const points1 = document.getElementById('current--1');
+const points2 = document.getElementById('current--2');
+const score1 = document.getElementById('score--1');
+const score2 = document.getElementById('score--2');
+
+const newGame = function () {
+    points1.innerHTML = 0;
+    points2.innerHTML = 0;
+    score1.innerHTML = 0;
+    score2.innerHTML = 0;
+}
 
 const rollDice = function () {
     let num = Math.floor((Math.random() * 6) + 1);
