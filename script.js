@@ -6,35 +6,59 @@ const diceBtn = document.querySelector('.btn--roll');
 const dice = document.querySelector('.dice');
 const holdBtn = document.querySelector('.btn--hold');
 const newGameBtn = document.querySelector('.btn--new');
-const points1 = document.getElementById('current--1');
-const points2 = document.getElementById('current--2');
-const score1 = document.getElementById('score--1');
-const score2 = document.getElementById('score--2');
+const score1 = document.getElementById('current--1');
+const score2 = document.getElementById('current--2');
+const total1 = document.getElementById('score--1');
+const total2 = document.getElementById('score--2');
+
+let scores, currentScore, activePlayer, playing;
 
 
 
 
 const newGame = function () {
-    points1.innerHTML = 0;
-    points2.innerHTML = 0;
-    score1.innerHTML = 0;
-    score2.innerHTML = 0;
+    scores = [0, 0];
+    currentScore = 0;
+    activePlayer = 1;
+    playing = true;
+
+    score1.textContent = 0;
+    score2.textContent = 0;
+    total1.textContent = 0;
+    total2.textContent = 0;
+
     dice.classList.add('hidden');
     player1.classList.add('player--active');
     player2.classList.remove('player--active');
+    player1.classList.remove('player--winner');
+    player2.classList.remove('player--winner');
 
 }
+newGame();
 
+
+// ROLL DICE
 const rollDice = function () {
     let num = Math.floor((Math.random() * 6) + 1);
     dice.setAttribute('src', `dice-${num}.png`);
-    if (num === 1) {
-
-
-
+    dice.classList.remove('hidden');
+    if (num != 1) {
+        currentScore += num;
+        document.getElementById(
+            `current--${activePlayer}`
+        ).textContent = currentScore;
+    } else {
+        switchPlayer();
     }
+}
 
-
+// SWITCH PLAYER
+const switchPlayer = function () {
+    document.getElementById(`current--${activePlayer}`).textContent = 0;
+    currentScore = 0;
+    activePlayer = activePlayer === 1 ? 2 : 1;
+    player1.classList.toggle('player--active');
+    player2.classList.toggle('player--active');
 }
 
 
